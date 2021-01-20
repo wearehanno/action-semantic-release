@@ -1,0 +1,15 @@
+{
+  "name": "action-semantic-release",
+  "version": "0.0.0-semantically-released",
+  "description": "Default Semantic Release action for Hanno projects",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:@wearehanno/action-semantic-release.git"
+  },
+  "keywords": [],
+  "author": "Hanno",
+  "license": "MIT"
+}
