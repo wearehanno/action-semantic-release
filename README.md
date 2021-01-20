@@ -1,6 +1,6 @@
 # action-semantic-release
 
-This is a highly opinionated helper action used on Hanno projects to quickly produce a new versioned release, adopting our standard format. You might find this an interesting reference, but you probably want to develop your own release preferences on your own projects.
+This is a highly opinionated helper action used on Hanno projects to quickly produce a new versioned release, adopting our standard format via [`semantic-release`](https://github.com/semantic-release/semantic-release). You might find this an interesting reference, but you probably want to develop your own release preferences on your own projects.
 
 ## Concept
 
