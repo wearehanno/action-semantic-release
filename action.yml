@@ -21,7 +21,6 @@ runs:
         npx semantic-release \
           --extends ${{ github.action_path }}/release-config.js \
           --branches ${{ inputs.branches }} \
-          --dry-run
       shell: bash
       env:
         GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
