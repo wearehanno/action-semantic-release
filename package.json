@@ -1,5 +1,5 @@
 {
-  "name": "action-semantic-release",
+  "name": "@wearehanno/action-semantic-release",
   "version": "0.0.0-semantically-released",
   "description": "Default Semantic Release action for Hanno projects",
   "scripts": {
