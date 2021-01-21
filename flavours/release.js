@@ -10,13 +10,6 @@ module.exports = {
       },
     ],
     [
-      '@semantic-release/npm',
-      {
-        npmPublish: false,
-        tarballDir: 'pack',
-      },
-    ],
-    [
       '@semantic-release/github',
       {
         assets: [{ path: 'pack/*.tgz', label: 'Release' }],
