@@ -23,7 +23,7 @@ runs:
       shell: bash
     - run: |
         npx semantic-release \
-          --extends ${{ github.action_path }}/${{ inputs.flavour }}.js \
+          --extends ${{ github.action_path }}/flavours/${{ inputs.flavour }}.js \
           --branches ${{ inputs.branches }} \
       shell: bash
       env:
