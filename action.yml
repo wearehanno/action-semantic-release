@@ -5,6 +5,10 @@ inputs:
     description: 'Which branch to create the release from'
     required: false
     default: 'main'
+  flavour:
+    description: 'Which flavour of the release process to run'
+    required: false
+    default: 'release'
 
 runs:
   using: 'composite'
@@ -19,7 +23,7 @@ runs:
       shell: bash
     - run: |
         npx semantic-release \
-          --extends ${{ github.action_path }}/release-config.js \
+          --extends ${{ github.action_path }}/${{ inputs.flavour }}.js \
           --branches ${{ inputs.branches }} \
       shell: bash
       env:
