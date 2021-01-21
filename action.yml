@@ -24,4 +24,4 @@ runs:
           --dry-run
       shell: bash
       env:
-        NPM_TOKEN: ${{ env.NPM_TOKEN }}
+        GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}

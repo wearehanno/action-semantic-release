@@ -24,13 +24,15 @@ The new version number is then written to the `package.json` and a tarball is cr
 
 This is uploaded to GitHub as both a new **Release** and also a **GitHub Package**. A new Git tag is created to represent the updated version number and applied to the latest commit on the branch. Note that the new version and changelog are _not_ committed to the codebase itself, but do appear in the tarballed GitHub Package.
 
+**Publishing to the NPM registry is disabled in this configuration.** Any repository using this action to publish packages will have to instruct their users outside their organisation to follow the [installation instruction for GitHub Packages](https://docs.github.com/en/packages/guides/configuring-npm-for-use-with-github-packages#installing-a-package).
+
 ## Usage
 
 To make use of the action on a Hanno project, you'll want to make the following changes to your source project:
 
 ### Adjust your `package.json` configuration
 
-If you want to produce a GitHub package as part of the release, you also need to specify in which files to include:
+If you want to produce a GitHub package as part of the release, you also need to specify which [files](https://docs.npmjs.com/cli/v6/configuring-npm/package-json#files) to include:
 
 ```
 {
@@ -39,6 +41,18 @@ If you want to produce a GitHub package as part of the release, you also need to
     "/dist",
     "/docs"
   ]
+}
+```
+
+Add the following to publish the package on GitHub instead of npm:
+
+```
+{
+  ...
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com"
+  }
+  ...
 }
 ```
 
@@ -51,7 +65,6 @@ In your `.github/workflow.yml`, add the following step:
   uses: @wearehanno/action-semantic-release
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 ```
 
 Inputs:
