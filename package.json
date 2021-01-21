@@ -9,9 +9,6 @@
     "type": "git",
     "url": "git@github.com:wearehanno/action-semantic-release.git"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
   "keywords": [],
   "author": "Hanno",
   "license": "MIT"
