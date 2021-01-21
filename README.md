@@ -17,15 +17,6 @@ When this action is run on a repository, it will analyse the `main` branch:
 - If there is at least 1 new commit with a `feat:`, `fix:` or `perf:` prefix, a new release will be triggered.
 - If other commit types (e.g. `style:`, `docs:` and `refactor:`) are present, these will be included in the release, but will _not_ trigger a release by themselves.
 
-The new version number is then written to the `package.json` and a tarball is created, containing:
-
-- the contents of the `"files": []` definition in `package.json` (see below)
-- the `package.json` itself (with correct version number)
-
-This is uploaded to GitHub as both a new **Release** and also a **GitHub Package**. A new Git tag is created to represent the updated version number and applied to the latest commit on the branch. Note that the new version and changelog are _not_ committed to the codebase itself, but do appear in the tarballed GitHub Package.
-
-**Publishing to the NPM registry is disabled in this configuration.** Any repository using this action to publish packages will have to instruct their users outside their organisation to follow the [installation instruction for GitHub Packages](https://docs.github.com/en/packages/guides/configuring-npm-for-use-with-github-packages#installing-a-package).
-
 ## Usage
 
 To make use of the action on a Hanno project, you'll want to make the following changes to your source project:
@@ -52,7 +43,6 @@ Add the following to publish the package on GitHub instead of npm:
   "publishConfig": {
     "registry":"https://npm.pkg.github.com"
   }
-  ...
 }
 ```
 
@@ -71,3 +61,22 @@ Inputs:
 
 - `branches` (default: `main`)
   The branches from which to run this action
+- `flavour` (default: `release`)
+  The flavour defines the semantic release configuration to run (see `/flavours`)
+
+Flavours:
+
+`release`
+
+The default config creates a new release on GitHub with a new version number. The new version number is then written to the `package.json`.
+
+This is uploaded to GitHub as a new **Release**. A new Git tag is created to represent the updated version number and applied to the latest commit on the branch. Note that the new version and changelog are _not_ committed to the codebase itself. They do appear in the tarballed GitHub Package when using the `release-package` flavour.
+
+`release-package`
+
+The `release-package` also creates a tarball, containing:
+
+- the contents of the `"files": []` definition in `package.json` (see below)
+- the `package.json` itself (with correct version number)
+
+**Publishing to the NPM registry is disabled in this configuration.** Any repository using this action to publish packages will have to instruct their users outside their organisation to follow the [installation instruction for GitHub Packages](https://docs.github.com/en/packages/guides/configuring-npm-for-use-with-github-packages#installing-a-package).
