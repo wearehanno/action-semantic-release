@@ -32,7 +32,7 @@ To make use of the action on a Hanno project, you'll want to make the following 
 
 ### Adjust your `package.json` configuration
 
-If you want to produce a GitHub package as part of the release, you also need to specify which [files](https://docs.npmjs.com/cli/v6/configuring-npm/package-json#files) to include:
+Optional: If you want to produce a package (to GitHub Packages) as part of the release, you may also wish to customise which [files](https://docs.npmjs.com/cli/v6/configuring-npm/package-json#files) to include in the package:
 
 ```
 {
