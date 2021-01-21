@@ -28,9 +28,9 @@ This is uploaded to GitHub as both a new **Release** and also a **GitHub Package
 
 To make use of the action on a Hanno project, you'll want to make the following changes to your source project:
 
-### Adjust your package configuration
+### Adjust your `package.json` configuration
 
-This determines which files will be included in the package:
+If you want to produce a GitHub package as part of the release, you also need to specify in which files to include:
 
 ```
 {
