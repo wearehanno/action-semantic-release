@@ -35,13 +35,16 @@ Optional: If you want to produce a package (to GitHub Packages) as part of the r
 }
 ```
 
-Add the following to publish the package on GitHub instead of npm:
+Add the following to publish the package on either NPM or GitHub:
 
 ```
 {
   ...
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com"
+    // Using GitHub
+    "registry": "https://npm.pkg.github.com"
+    // Using NPM
+    "registry": "https://registry.npmjs.org/",
   }
 }
 ```
@@ -54,8 +57,12 @@ In your `.github/workflow.yml`, add the following step:
 - name: Release
   uses: @wearehanno/action-semantic-release
   env:
-    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required for publishing GitHub *Release*
+    NPM_TOKEN: ${{ secrets.NPM_TOKEN }} # Required for publishing a *Package*
+    
 ```
+
+The [`GITHUB_TOKEN`](https://docs.github.com/en/actions/reference/authentication-in-a-workflow#about-the-github_token-secret) is automatically created by GitHub and available to all workflows for authentication. If you are publishing the package to GitHub Packages, you can re-use it as your `NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}`. But if publishing to an external registry like `npmjs.com`, you'll need to create a dedicated `NPM_TOKEN` token with publishing permissions, and add this as a [repository secret](https://docs.github.com/en/actions/reference/encrypted-secrets).
 
 Inputs:
 
@@ -78,5 +85,3 @@ The `release-package` also creates a tarball, containing:
 
 - the contents of the `"files": []` definition in `package.json` (see below)
 - the `package.json` itself (with correct version number)
-
-**Publishing to the NPM registry is disabled in this configuration.** Any repository using this action to publish packages will have to instruct their users outside their organisation to follow the [installation instruction for GitHub Packages](https://docs.github.com/en/packages/guides/configuring-npm-for-use-with-github-packages#installing-a-package).

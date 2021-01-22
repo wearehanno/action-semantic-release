@@ -28,3 +28,4 @@ runs:
       shell: bash
       env:
         GITHUB_TOKEN: ${{ env.GITHUB_TOKEN }}
+        NPM_TOKEN: ${{ env.NPM_TOKEN }}
