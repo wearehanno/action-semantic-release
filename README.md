@@ -17,13 +17,15 @@ When this action is run on a repository, it will analyse the `main` branch:
 - If there is at least 1 new commit with a `feat:`, `fix:` or `perf:` prefix, a new release will be triggered.
 - If other commit types (e.g. `style:`, `docs:` and `refactor:`) are present, these will be included in the release, but will _not_ trigger a release by themselves.
 
+We automatically determine the next [semantic version](https://semver.org) number, generate a changelog (which is included as a markdown file) and publish the release.
+
 ## Usage
 
 To make use of the action on a Hanno project, you'll want to make the following changes to your source project:
 
 ### Adjust your `package.json` configuration
 
-Optional: If you want to produce a package (to GitHub Packages) as part of the release, you may also wish to customise which [files](https://docs.npmjs.com/cli/v6/configuring-npm/package-json#files) to include in the package:
+Optional: If you want to release a Package as part of the release, you will wish to customise which [files](https://docs.npmjs.com/cli/v6/configuring-npm/package-json#files) to include in the package:
 
 ```
 {
@@ -35,17 +37,25 @@ Optional: If you want to produce a package (to GitHub Packages) as part of the r
 }
 ```
 
-Add the following to publish the package on either NPM or GitHub:
+To publish the package privately to GitHub Packages:
 
 ```
 {
   ...
   "publishConfig": {
-    // Using GitHub
-    "registry": "https://npm.pkg.github.com",
-    // Using NPM
+    "registry": "https://npm.pkg.github.com"
+  }
+}
+```
+
+To publish the package to the NPM registry (public or private):
+
+```
+{
+  ...
+  "publishConfig": {
     "registry": "https://registry.npmjs.org/",
-    // If you are publishing to NPM and want to make the package public
+    // If you are publishing to NPM and want to make the package public, include the line below
     "access": "public",
   }
 }
@@ -53,7 +63,7 @@ Add the following to publish the package on either NPM or GitHub:
 
 ### Customise your workflow
 
-In your `.github/workflow.yml`, add the following step:
+In your `.github/workflows/workflow.yml`, add the following step:
 
 ```
 - name: Release
@@ -61,7 +71,6 @@ In your `.github/workflow.yml`, add the following step:
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required for publishing GitHub *Release*
     NPM_TOKEN: ${{ secrets.NPM_TOKEN }} # Required for publishing a *Package*
-    
 ```
 
 The [`GITHUB_TOKEN`](https://docs.github.com/en/actions/reference/authentication-in-a-workflow#about-the-github_token-secret) is automatically created by GitHub and available to all workflows for authentication. If you are publishing the package to GitHub Packages, you can re-use it as your `NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}`. But if publishing to an external registry like `npmjs.com`, you'll need to create a dedicated `NPM_TOKEN` token with publishing permissions, and add this as a [repository secret](https://docs.github.com/en/actions/reference/encrypted-secrets).
