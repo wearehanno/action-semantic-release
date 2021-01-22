@@ -58,6 +58,7 @@ In your `.github/workflow.yml`, add the following step:
   uses: @wearehanno/action-semantic-release
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    NPM_TOKEN: ${{ secrets.NPM_TOKEN }} # If you wish to publish to a registry like npmjs.com
 ```
 
 Inputs:
@@ -81,5 +82,3 @@ The `release-package` also creates a tarball, containing:
 
 - the contents of the `"files": []` definition in `package.json` (see below)
 - the `package.json` itself (with correct version number)
-
-**Publishing to the NPM registry is disabled in this configuration.** Any repository using this action to publish packages will have to instruct their users outside their organisation to follow the [installation instruction for GitHub Packages](https://docs.github.com/en/packages/guides/configuring-npm-for-use-with-github-packages#installing-a-package).
