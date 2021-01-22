@@ -35,13 +35,16 @@ Optional: If you want to produce a package (to GitHub Packages) as part of the r
 }
 ```
 
-Add the following to publish the package on GitHub instead of npm:
+Add the following to publish the package on either NPM or GitHub:
 
 ```
 {
   ...
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com"
+    // Using GitHub
+    "registry": "https://npm.pkg.github.com"
+    // Using NPM
+    "registry": "https://registry.npmjs.org/",
   }
 }
 ```
