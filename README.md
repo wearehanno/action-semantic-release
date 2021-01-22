@@ -42,9 +42,11 @@ Add the following to publish the package on either NPM or GitHub:
   ...
   "publishConfig": {
     // Using GitHub
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://npm.pkg.github.com",
     // Using NPM
     "registry": "https://registry.npmjs.org/",
+    // If you are publishing to NPM and want to make the package public
+    "access": "public",
   }
 }
 ```
