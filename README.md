@@ -57,7 +57,7 @@ In your `.github/workflow.yml`, add the following step:
 
 ```
 - name: Release
-  uses: @wearehanno/action-semantic-release
+  uses: wearehanno/action-semantic-release
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required for publishing GitHub *Release*
     NPM_TOKEN: ${{ secrets.NPM_TOKEN }} # Required for publishing a *Package*
