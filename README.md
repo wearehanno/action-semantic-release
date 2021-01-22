@@ -57,9 +57,12 @@ In your `.github/workflow.yml`, add the following step:
 - name: Release
   uses: @wearehanno/action-semantic-release
   env:
-    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    NPM_TOKEN: ${{ secrets.NPM_TOKEN }} # If you wish to publish to a registry like npmjs.com
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required for publishing GitHub *Release*
+    NPM_TOKEN: ${{ secrets.NPM_TOKEN }} # Required for publishing a *Package*
+    
 ```
+
+The [`GITHUB_TOKEN`](https://docs.github.com/en/actions/reference/authentication-in-a-workflow#about-the-github_token-secret) is automatically created by GitHub and available to all workflows for authentication. If you are publishing the package to GitHub Packages, you can re-use it as your `NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}`. But if publishing to an external registry like `npmjs.com`, you'll need to create a dedicated `NPM_TOKEN` token with publishing permissions, and add this as a [repository secret](https://docs.github.com/en/actions/reference/encrypted-secrets).
 
 Inputs:
 
