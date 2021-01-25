@@ -1,8 +1,8 @@
 # action-semantic-release
 
-This is a highly opinionated helper action used on Hanno projects to quickly produce a new [`semantic-release`](https://github.com/semantic-release/semantic-release) of a dependency using our favoured workflow and configurations. Hosting this as an action means that we don't need to include a semantic release configuration on every project.
+This is a highly opinionated helper Action used on Hanno projects to quickly produce a new [`semantic-release`](https://github.com/semantic-release/semantic-release) of a dependency using our favoured workflow and configurations. Hosting this as an Action means that we don't need to include a semantic release configuration on every project.
 
-**We don't recommend using this action on non-Hanno projects, as it may not remain available indefinitely**.
+**We don't recommend using this Action on non-Hanno projects, as it may not remain available indefinitely**.
 
 ## Introduction
 
@@ -14,7 +14,7 @@ feat(android): add search functionality (#1)
 
 As well as ensuring that every commit has a usable title, this format also allows us to automatically determine when a new version should be generated on a project and publish this automatically, along with the corresponding release notes.
 
-When this action is run on a repository, it will analyse the `main` branch:
+When this Action is run on a repository, it will analyse the `main` branch:
 
 - If there is at least 1 new commit with a `feat:`, `fix:` or `build:` prefix, a new release will be triggered. (a MINOR release in the case of `feat`, a PATCH release in the case of `fix` or `build`).
 - a commit that has a footer BREAKING CHANGE:, or appends a ! after the type/scope, introduces a breaking API change (correlating with MAJOR in semantic versioning).
