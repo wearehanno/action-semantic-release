@@ -22,7 +22,7 @@ We automatically determine the next [semantic version](https://semver.org) numbe
 
 ## Configuration
 
-### Customise the release type
+### Release flavour
 
 We support 3 different `flavour` types for releases:
 
@@ -111,12 +111,12 @@ In your `.github/workflows/main.yml` (or similar):
     flavour: release-package
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required for publishing GitHub *Release*
-    NPM_TOKEN: ${{ secrets.NPM_TOKEN }} # Required for publishing a GitHub *Package*
+    NPM_TOKEN: ${{ secrets.NPM_TOKEN }} # Required for publishing a NPM *Package*
 ```
 
-When publishing to an external registry like `npmjs.com`, you'll need to [create a dedicated access token](https://docs.npmjs.com/creating-and-viewing-access-tokens) with "Automation" type, and publishing permissions. You'll then need to add this as a [repository secret](https://docs.github.com/en/actions/reference/encrypted-secrets) called `NPM_TOKEN` on GitHub.
+When publishing to an external registry like `npmjs.com`, you'll need to [create a dedicated access token](https://docs.npmjs.com/creating-and-viewing-access-tokens) with "Automation" type, and publishing permissions. You'll then need to add this as an [encrypted secret](https://docs.github.com/en/actions/reference/encrypted-secrets) called `NPM_TOKEN` on your GitHub repository. **Take care when using secrets in a public repository: when handled incorrectly, they may become publicly visible**. 
 
-### Customise the branch type
+### Branch to run on
 
 We default to running the release on your `main` branch, but this can be customised using the `branches` option:
 
