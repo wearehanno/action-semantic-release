@@ -1,18 +1,18 @@
 # action-semantic-release
 
-This is a highly opinionated helper action used on Hanno projects to quickly produce a new [`semantic-release`](https://github.com/semantic-release/semantic-release) of a dependency in a couple of lines.
+This is a highly opinionated helper action used on Hanno projects to quickly produce a new [`semantic-release`](https://github.com/semantic-release/semantic-release) of a dependency using our favoured workflow and configurations. Hosting this as an action means that we don't need to include a semantic release configuration on every project.
 
-You may find this action to be an interesting reference for your own projects, but **we don't recommend using it outside of a Hanno project, and can't guarantee that it will remain available indefinitely**.
+**We don't recommend using this action on non-Hanno projects, as it may not remain available indefinitely**.
 
 ## Introduction
 
-We adopt the [Conventional Commits commit message conventions](https://www.conventionalcommits.org/en/v1.0.0/#summary) on our projects, so commit messages contain helpful context for every PR that gets merged:
+We adopt the [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/#summary) for git commit messages on Hanno projects. Here's an example:
 
 ```
 feat(android): add search functionality (#1)
 ```
 
-This allows us to automatically determine when a new version should be generated on a project and publish this automatically, along with the corresponding release notes.
+As well as ensuring that every commit has a usable title, this format also allows us to automatically determine when a new version should be generated on a project and publish this automatically, along with the corresponding release notes.
 
 When this action is run on a repository, it will analyse the `main` branch:
 
@@ -20,7 +20,7 @@ When this action is run on a repository, it will analyse the `main` branch:
 - a commit that has a footer BREAKING CHANGE:, or appends a ! after the type/scope, introduces a breaking API change (correlating with MAJOR in semantic versioning).
 - If other commit types (e.g. `style:`, `docs:` and `refactor:`) are present, these will be included in the release, but will _not_ trigger a release by themselves.
 
-We automatically determine the next [semantic version](https://semver.org) number, generate a changelog (which is included as a markdown file) and publish the release.
+We automatically determine the next [semantic version](https://semver.org) number, generate a changelog as a Markdown file, and publish the release (and package, where requested).
 
 ## Configuration
 
