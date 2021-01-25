@@ -4,8 +4,8 @@ module.exports = {
     [
       '@semantic-release/commit-analyzer',
       {
-        preset: 'conventionalcommit',
-        presetConfig: {
+        config: 'conventional-changelog-conventionalcommits',
+        releaseRules: {
           types: {
             type: 'build',
             release: 'minor',
@@ -15,7 +15,7 @@ module.exports = {
     ],
     [
       '@semantic-release/release-notes-generator',
-      { preset: 'conventionalcommit' },
+      { config: 'conventional-changelog-conventionalcommits' },
     ],
     [
       '@semantic-release/changelog',
