@@ -15,11 +15,7 @@ runs:
   steps:
     - run: |
         yarn add \
-          @semantic-release/changelog \
-          @semantic-release/commit-analyzer \
-          @semantic-release/github \
-          @semantic-release/npm \
-          @semantic-release/release-notes-generator
+          @semantic-release/changelog
       shell: bash
     - run: |
         npx semantic-release \
