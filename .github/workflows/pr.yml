@@ -2,7 +2,6 @@ name: "pr"
 on:
   pull_request:
     # To avoid running this on WIP PRs, consider: types: [review_requested, ready_for_review]
-    # There are a few known issues regarding this Action creating duplicate status checks, so you may want to fine-tune this
     types:
       - opened
       - reopened
