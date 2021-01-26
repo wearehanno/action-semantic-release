@@ -8,7 +8,7 @@ module.exports = {
         releaseRules: [
           {
             type: "build",
-            release: "minor",
+            release: "patch",
           },
         ],
       },
