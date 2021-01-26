@@ -19,6 +19,7 @@ runs:
           @semantic-release/release-notes-generator \
           @semantic-release/changelog \
           @semantic-release/github \
+          @semantic-release/npm \
           conventional-changelog-conventionalcommits@4.5.0
       shell: bash
     - run: |
