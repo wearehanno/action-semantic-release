@@ -15,7 +15,10 @@ runs:
   steps:
     - run: |
         yarn add \
+          @semantic-release/commit-analyzer \
+          @semantic-release/release-notes-generator \
           @semantic-release/changelog \
+          @semantic-release/github \
           conventional-changelog-conventionalcommits@4.5.0
       shell: bash
     - run: |
