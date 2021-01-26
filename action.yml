@@ -1,25 +1,22 @@
-name: 'action-semantic-release'
+name: "action-semantic-release"
 
 inputs:
   branches:
-    description: 'Which branch to create the release from'
+    description: "Which branch to create the release from"
     required: false
-    default: 'main'
+    default: "main"
   flavour:
-    description: 'Which flavour of the release process to run'
+    description: "Which flavour of the release process to run"
     required: false
-    default: 'release'
+    default: "release"
 
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
     - run: |
         yarn add \
           @semantic-release/changelog \
-          @semantic-release/commit-analyzer \
-          @semantic-release/github \
-          @semantic-release/npm \
-          @semantic-release/release-notes-generator
+          conventional-changelog-conventionalcommits@4.5.0
       shell: bash
     - run: |
         npx semantic-release \
