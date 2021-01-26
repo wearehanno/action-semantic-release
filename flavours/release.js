@@ -1,32 +1,32 @@
 module.exports = {
-  branches: ['main'],
+  branches: ["main"],
   plugins: [
     [
-      '@semantic-release/commit-analyzer',
+      "@semantic-release/commit-analyzer",
       {
-        config: 'conventional-changelog-conventionalcommits',
-        releaseRules: {
-          types: {
-            type: 'build',
-            release: 'minor',
+        config: "conventional-changelog-conventionalcommits",
+        releaseRules: [
+          {
+            type: "build",
+            release: "minor",
           },
-        },
+        ],
       },
     ],
     [
-      '@semantic-release/release-notes-generator',
-      { config: 'conventional-changelog-conventionalcommits' },
+      "@semantic-release/release-notes-generator",
+      { config: "conventional-changelog-conventionalcommits" },
     ],
     [
-      '@semantic-release/changelog',
+      "@semantic-release/changelog",
       {
-        changelogFile: 'docs/CHANGELOG.md',
+        changelogFile: "docs/CHANGELOG.md",
       },
     ],
     [
-      '@semantic-release/github',
+      "@semantic-release/github",
       {
-        assets: [{ path: 'pack/*.tgz', label: 'Release' }],
+        assets: [{ path: "pack/*.tgz", label: "Release" }],
       },
     ],
   ],
