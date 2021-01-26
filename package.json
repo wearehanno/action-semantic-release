@@ -12,7 +12,5 @@
   "keywords": [],
   "author": "Hanno",
   "license": "MIT",
-  "dependencies": {
-    "conventional-changelog-conventionalcommits": "^4.5.0"
-  }
+  "dependencies": {}
 }
