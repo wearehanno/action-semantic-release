@@ -14,4 +14,3 @@ jobs:
         uses: wearehanno/action-semantic-release@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required for publishing a GitHub *Release*
-          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
