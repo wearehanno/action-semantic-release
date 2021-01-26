@@ -1,10 +1,10 @@
-name: "release"
+name: "main"
 
 on: push
 
 jobs:
-  release:
-    name: release
+  main_release:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -13,5 +13,5 @@ jobs:
       - name: Release
         uses: wearehanno/action-semantic-release@main
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required for publishing a GitHub *Release*
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
