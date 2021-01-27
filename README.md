@@ -57,6 +57,18 @@ In addition to tagging a release, the `release-package` also creates a tarball p
 - the `package.json` (with the updated version number)
 - a `Changelog.md` inside `./docs`
 
+In your `.github/workflows/main.yml` (or similar):
+
+```
+- name: Release
+  uses: wearehanno/action-semantic-release@main
+  with:
+    flavour: release-package
+  env:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required for publishing GitHub *Release*
+    NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required for publishing a GitHub *Package*
+```
+
 In your `package.json`:
 
 ```
@@ -73,6 +85,8 @@ In your `package.json`:
 }
 ```
 
+#### Option 3: GitHub Release + (Public) NPM package (`release-package`)
+
 In your `.github/workflows/main.yml` (or similar):
 
 ```
@@ -82,10 +96,10 @@ In your `.github/workflows/main.yml` (or similar):
     flavour: release-package
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required for publishing GitHub *Release*
-    NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required for publishing a GitHub *Package*
+    NPM_TOKEN: ${{ secrets.NPM_TOKEN }} # Required for publishing a NPM *Package*
 ```
 
-#### Option 3: GitHub Release + (Public) NPM package (`release-package`)
+When publishing to an external registry like `npmjs.com`, you'll need to [create a dedicated access token](https://docs.npmjs.com/creating-and-viewing-access-tokens) with "Automation" type, and publishing permissions. You'll then need to add this as an [encrypted secret](https://docs.github.com/en/actions/reference/encrypted-secrets) called `NPM_TOKEN` on your GitHub repository. **Take care when using secrets in a public repository: when handled incorrectly, they may become publicly visible**.
 
 In your `package.json`:
 
@@ -103,20 +117,6 @@ In your `package.json`:
   }
 }
 ```
-
-In your `.github/workflows/main.yml` (or similar):
-
-```
-- name: Release
-  uses: wearehanno/action-semantic-release@main
-  with:
-    flavour: release-package
-  env:
-    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required for publishing GitHub *Release*
-    NPM_TOKEN: ${{ secrets.NPM_TOKEN }} # Required for publishing a NPM *Package*
-```
-
-When publishing to an external registry like `npmjs.com`, you'll need to [create a dedicated access token](https://docs.npmjs.com/creating-and-viewing-access-tokens) with "Automation" type, and publishing permissions. You'll then need to add this as an [encrypted secret](https://docs.github.com/en/actions/reference/encrypted-secrets) called `NPM_TOKEN` on your GitHub repository. **Take care when using secrets in a public repository: when handled incorrectly, they may become publicly visible**.
 
 ### Branch to run on
 
