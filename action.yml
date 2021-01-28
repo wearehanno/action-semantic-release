@@ -14,7 +14,7 @@ runs:
   using: "composite"
   steps:
     - run: |
-        yarn add -D \
+        yarn add --ignore-scripts -D \
           @semantic-release/commit-analyzer@8.0.1 \
           @semantic-release/release-notes-generator@9.0.1 \
           @semantic-release/changelog@5.0.1 \
