@@ -4,7 +4,7 @@ This is a highly opinionated helper Action used on Hanno projects to quickly pro
 
 **We don't recommend using this Action on non-Hanno projects, as it may not remain available indefinitely**.
 
-## Introduction
+## Understanding the release process
 
 We adopt the [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/#summary) for git commit messages on Hanno projects. Here's an example of what a merged PR would look like in the git log:
 
