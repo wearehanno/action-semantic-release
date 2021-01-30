@@ -14,13 +14,19 @@ feat(android): add search functionality (#1)
 
 As well as ensuring that every commit has a usable title, this format also allows us to automatically determine when a new version should be generated on a project and publish this automatically, along with the corresponding release notes.
 
-When this Action is run on a repository, it will analyse the `main` branch:
+When this Action is run on a repository, it will analyse the `main` branch to look for releasable commits. If any are found, we automatically:
 
-- If there is at least 1 new commit with a `feat:`, `fix:` or `build:` prefix, a new release will be triggered. (a MINOR release in the case of `feat`, a PATCH release in the case of `fix` or `build`).
-- a commit that has a footer BREAKING CHANGE:, or appends a ! after the type/scope, introduces a breaking API change (correlating with MAJOR in semantic versioning).
-- If other commit types (e.g. `style:`, `docs:` and `refactor:`) are present, these will be included in the release, but will _not_ trigger a release by themselves.
+1. Determine the next [semantic version](https://semver.org) number
+2. Generate a `docs/CHANGELOG.md` file
+3. Publish the release (and package, where requested).
 
-We automatically determine the next [semantic version](https://semver.org) number, generate a changelog as a Markdown file, and publish the release (and package, where requested).
+For context on what constitutes a "releasable commit":
+
+- If there is at least 1 new commit with a `feat:`, `fix:` or `build:` prefix, a new release will be triggered.
+- If other commit types (e.g. `style:`, `docs:` and `refactor:`) are present, these will be included in the release, but will _not_ trigger a release by themselves. This helps to cut down on noise.
+- If the last release was `v1.1.2`, and 5 `fix:` commits have been added since then, the next release would bump by 5 patches, to `v1.1.7`.
+- These version numbers are added to the repository as Git tags. This allows us to track release history over time.
+
 
 ## Configuration
 
