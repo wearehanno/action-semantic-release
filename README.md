@@ -6,27 +6,34 @@ This is a highly opinionated helper Action used on Hanno projects to quickly pro
 
 ## Introduction
 
-We adopt the [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/#summary) for git commit messages on Hanno projects. Here's an example:
+We adopt the [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/#summary) for git commit messages on Hanno projects. Here's an example of what a merged PR would look like in the git log:
 
 ```
 feat(android): add search functionality (#1)
 ```
 
-As well as ensuring that every commit has a usable title, this format also allows us to automatically determine when a new version should be generated on a project and publish this automatically, along with the corresponding release notes.
+As well as making it easier to follow the git history, this methodology also allows us to automatically determine when a new version and release should be generated.
 
-When this Action is run on a repository, it will analyse the `main` branch to look for releasable commits. If any are found, we automatically:
+We run this Action on most of our projects after a PR has been merged and analyse the `main` branch to look for releasable commits. If any are found, we automatically:
 
-1. Determine the next [semantic version](https://semver.org) number
+1. Calculate the next [semantic version](https://semver.org) number
 2. Generate a `docs/CHANGELOG.md` file
 3. Publish the release (and package, where requested).
+4. Apply a git tag with the corresponding version number.
 
 For context on what constitutes a "releasable commit":
 
-- If there is at least 1 new commit with a `feat:`, `fix:` or `build:` prefix, a new release will be triggered.
-- If other commit types (e.g. `style:`, `docs:` and `refactor:`) are present, these will be included in the release, but will _not_ trigger a release by themselves. This helps to cut down on noise.
-- If the last release was `v1.1.2`, and 5 `fix:` commits have been added since then, the next release would bump by 5 patches, to `v1.1.7`.
-- These version numbers are added to the repository as Git tags. This allows us to track release history over time.
+A releasable commit is one with a `feat:`, `fix:` or `build:` prefix. If other commit types (e.g. `style:`, `docs:`, `refactor:`) are present, these will be included in the next release, but will _not_ trigger a release by themselves. This helps to cut down on noise.
 
+So if the last release was `v1.1.2`, and 5 `fix:` commits have been added since then, the next release would bump by 5 patches, to `v1.1.7`.
+
+The semver is applied as follows:
+
+| Message                                                                                                                                                                     | Type             | Change         |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | -------------- |
+| fix: stop graphite breaking when too much pressure applied                                                                                                                  | Patch            | 1.0.0 => 1.0.1 |
+| feat: add 'graphiteWidth' option                                                                                                                                            | Minor            | 1.0.0 => 1.1.0 |
+| feat: remove graphiteWidth option<br>BREAKING CHANGE: The graphiteWidth option has been removed. The default graphite width of 10mm is always used for performance reasons. | Major (Breaking) | 1.0.0 => 2.0.0 |
 
 ## Configuration
 
