@@ -2,9 +2,6 @@
   "name": "@wearehanno/action-semantic-release",
   "version": "0.0.0-semantically-released",
   "description": "Default Semantic Release action for Hanno projects",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git@github.com:wearehanno/action-semantic-release.git"
@@ -12,12 +9,5 @@
   "keywords": [],
   "author": "Hanno",
   "license": "MIT",
-  "dependencies": {
-    "@semantic-release/changelog": "5.0.1",
-    "@semantic-release/commit-analyzer": "8.0.1",
-    "@semantic-release/github": "7.2.0",
-    "@semantic-release/npm": "7.0.10",
-    "@semantic-release/release-notes-generator": "9.0.1",
-    "conventional-changelog-conventionalcommits": "4.5.0"
-  }
+  "devDependencies": {}
 }
