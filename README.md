@@ -54,10 +54,17 @@ See below for the changes you'll need to make to your consuming project to selec
 In your `.github/workflows/main.yml` (or similar):
 
 ```
-- name: Release
-  uses: wearehanno/action-semantic-release@main
-  env:
-    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required for publishing GitHub *Release*
+main_release:
+  if: github.ref == 'refs/heads/main'
+  needs: main_test
+  runs-on: ubuntu-latest
+  steps:
+    ... your setup steps here
+
+    - name: Release
+      uses: wearehanno/action-semantic-release@main
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required for publishing GitHub *Release*
 ```
 
 The [`GITHUB_TOKEN`](https://docs.github.com/en/actions/reference/authentication-in-a-workflow#about-the-github_token-secret) is automatically created by GitHub and available to all workflows for authentication. So you do not need to add this to your repository secrets.
@@ -73,13 +80,19 @@ In addition to tagging a release, the `release-package` also creates a tarball p
 In your `.github/workflows/main.yml` (or similar):
 
 ```
-- name: Release
-  uses: wearehanno/action-semantic-release@main
-  with:
-    flavour: release-package
-  env:
-    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required for publishing GitHub *Release*
-    NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required for publishing a GitHub *Package*
+main_release:
+  ...
+  
+  steps:
+    ... your setup steps here
+
+    - name: Release
+      uses: wearehanno/action-semantic-release@main
+      with:
+        flavour: release-package
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required for publishing GitHub *Release*
+        NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required for publishing a GitHub *Package*
 ```
 
 In your `package.json`:
@@ -103,13 +116,19 @@ In your `package.json`:
 In your `.github/workflows/main.yml` (or similar):
 
 ```
-- name: Release
-  uses: wearehanno/action-semantic-release@main
-  with:
-    flavour: release-package
-  env:
-    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required for publishing GitHub *Release*
-    NPM_TOKEN: ${{ secrets.NPM_TOKEN }} # Required for publishing a NPM *Package*
+main_release:
+  ...
+  
+  steps:
+    ... your setup steps here
+
+    - name: Release
+      uses: wearehanno/action-semantic-release@main
+      with:
+        flavour: release-package
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Required for publishing GitHub *Release*
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }} # Required for publishing a NPM *Package*
 ```
 
 When publishing to an external registry like `npmjs.com`, you'll need to [create a dedicated access token](https://docs.npmjs.com/creating-and-viewing-access-tokens) with "Automation" type, and publishing permissions. You'll then need to add this as an [encrypted secret](https://docs.github.com/en/actions/reference/encrypted-secrets) called `NPM_TOKEN` on your GitHub repository. **Take care when using secrets in a public repository: when handled incorrectly, they may become publicly visible**.
