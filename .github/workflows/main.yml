@@ -1,3 +1,6 @@
+# NB: This workflow controls the release of new versions of the wearehanno/action-semantic-release Action
+# It is *not* part of the Action. For that context, take a look at the action.yml in this repository
+
 name: "main"
 
 on: push
