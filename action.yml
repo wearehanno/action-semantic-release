@@ -1,4 +1,5 @@
 name: "action-semantic-release"
+description: 'A self-contained semantic release action for Hanno projects'
 
 inputs:
   branches:
@@ -9,22 +10,31 @@ inputs:
     description: "Which flavour of the release process to run"
     required: false
     default: "release"
+  semantic_release_version:
+    description: "Which version of semantic-release to use"
+    required: false
+    default: "17.4.2"
 
 runs:
   using: "composite"
   steps:
+    # First, install the dependencies that we'll need
+    # We tell these not to save, because we don't want to interfere with the project's package.json, which may be committed later on
     - run: |
-        yarn add --ignore-scripts -D \
-          @semantic-release/commit-analyzer@8.0.1 \
-          @semantic-release/release-notes-generator@9.0.1 \
+        npm add --no-save --ignore-scripts \
+          semantic-release@${{ inputs.semantic_release_version }} \
           @semantic-release/changelog@5.0.1 \
+          @semantic-release/commit-analyzer@8.0.1 \
+          @semantic-release/git@9.0.0 \
           @semantic-release/github@7.2.0 \
-          @semantic-release/npm@7.0.10 \
+          @semantic-release/npm@7.1.0 \
+          @semantic-release/release-notes-generator@9.0.2 \
           conventional-changelog-conventionalcommits@4.5.0
       shell: bash
+    # Now we run semantic-release, overriding properties as required
     - run: |
-        npx semantic-release \
-          --extends ${{ github.action_path }}/flavours/${{ inputs.flavour }}.js \
+        npx semantic-release@${{ inputs.semantic_release_version }} \
+          --extends ${{ github.action_path }}/src/flavours/${{ inputs.flavour }}.js \
           --branches ${{ inputs.branches }} \
       shell: bash
       env:
